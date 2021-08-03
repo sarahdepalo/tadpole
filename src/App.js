@@ -47,6 +47,9 @@ function App() {
       <Router>
         <div className="container">
           <Switch>
+            <Route exact path="/">
+              <h1>Tadpole</h1>
+            </Route>
             <Route
               exact
               path="/login"
@@ -65,7 +68,7 @@ function App() {
                 !isAuthenticated ? (
                   <Register {...props} setAuth={setAuth} />
                 ) : (
-                  <Redirect to="/dashboard" />
+                  <Redirect to="/login" />
                 )
               }
             />

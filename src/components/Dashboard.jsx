@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import {Redirect} from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const Dashboard = ({ setAuth }) => {
@@ -27,6 +28,7 @@ const Dashboard = ({ setAuth }) => {
 
   //removes the stored token and logs user out
   const logout = (event) => {
+    <Redirect to="/" />
     event.preventDefault();
     localStorage.removeItem("token");
     setAuth(false);

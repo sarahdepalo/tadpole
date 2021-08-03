@@ -53,6 +53,7 @@ const Login = ({ setAuth }) => {
           placeholder="Enter Your Email"
           value={email}
           onChange={(event) => onChange(event)}
+          data-testid="email"
         />
         <br />
         <input
@@ -61,9 +62,10 @@ const Login = ({ setAuth }) => {
           placeholder="Enter Your Password"
           value={password}
           onChange={(event) => onChange(event)}
+          data-testid="password"
         />
         <br />
-        <button type="submit">Login</button>
+        <button type="submit" data-testid="loginBtn">Login</button>
       </form>
 
       <Link to="/register">Not a user? Head over to Register</Link>

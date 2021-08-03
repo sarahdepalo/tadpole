@@ -76,6 +76,7 @@ const Register = ({ setAuth }) => {
             placeholder="John"
             value={firstName}
             onChange={(event) => onChange(event)}
+            required
           />
         </label>
 
@@ -88,6 +89,7 @@ const Register = ({ setAuth }) => {
             placeholder="Doe"
             value={lastName}
             onChange={(event) => onChange(event)}
+            required
           />
         </label>
         <br />
@@ -99,6 +101,7 @@ const Register = ({ setAuth }) => {
             placeholder="johndoe@email.com"
             value={email}
             onChange={(event) => onChange(event)}
+            required
           />
         </label>
         <br/>
@@ -110,6 +113,7 @@ const Register = ({ setAuth }) => {
             placeholder="Your Password"
             value={password}
             onChange={(event) => onChange(event)}
+            required
           />
         </label>
         <br />
@@ -122,6 +126,7 @@ const Register = ({ setAuth }) => {
             placeholder="New York"
             value={primaryLocationState}
             onChange={(event) => onChange(event)}
+            required
           />
         </label>
         <label>
@@ -132,16 +137,18 @@ const Register = ({ setAuth }) => {
             placeholder="Buffalo"
             value={primaryLocationCity}
             onChange={(event) => onChange(event)}
+            required
           />
         </label>
         <label>
-            City:
+            Zipcode:
           <input
             type="number"
             name="primaryLocationZip"
             placeholder="14211"
             value={primaryLocationZip}
             onChange={(event) => onChange(event)}
+            required
           />
         </label>
         <button type="submit">Register</button>
