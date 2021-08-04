@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import DailyWeather from "./DailyWeather";
 import WeeklyWeather from "./WeeklyWeather";
+import Iframe from "./Iframe";
 
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
   const [zipcode, setZipcode] = useState("");
   const [dailyWeather, setDailyWeather] = useState(null);
   const [dailyWeatherIcon, setDailyWeatherIcon] = useState("");
-  const [weeklyWeather, setWeeklyWeather] = useState({});
+  const [weeklyWeather, setWeeklyWeather] = useState([]);
 
   //Weather unlocked keys & stuff -- Not working need to fix and replace stuff later
   const APP_ID = process.env.REACT_APP_ID;
@@ -29,7 +30,6 @@ const Dashboard = ({ setAuth }) => {
 
       fetchDailyWeather(response.primarylocationzip);
       fetchWeeklyWeather(response.primarylocationzip);
-
     } catch (error) {
       console.error(error.message);
     }
@@ -54,9 +54,8 @@ const Dashboard = ({ setAuth }) => {
       `http://api.weatherunlocked.com/api/forecast/us.${zipcode}?app_id=5b784a4c&app_key=284ee951bf61c4d6a14ed1d37a4f75ba`
     ).then((response) => response.json());
 
-    console.log(response);
+    console.log("WeeklyWeather Response: ", response);
     setWeeklyWeather(response.Days);
-    console.log("Weekly Weather:", weeklyWeather);
   };
 
   useEffect(() => {
@@ -71,23 +70,54 @@ const Dashboard = ({ setAuth }) => {
     toast.success("Logged Out Successfully");
   };
 
+  //Inspirational quotes
+  const inspoQuotes = [
+    "Make each day your masterpiece. -John Wooden",
+    "The best revenge is massive success. -Frank Sinatra",
+    "Dream big and dare to fail. -Norman Vaughan",
+    "It does not matter how slowly you go as long as you do not stop. -Confucius",
+    "Don’t let yesterday take up too much of today. —Will Rogers",
+  ];
+
+  let quote = inspoQuotes[Math.floor(Math.random() * inspoQuotes.length)];
+
   return (
     <>
-      <h1>Dashboard</h1>
-      <h2>Hello, {name}</h2>
-      {dailyWeather !== null ? (
-        <>
-          <p>Here is today's weather for {dailyWeather.name}</p>
-          <DailyWeather todaysweather={dailyWeather} icon={dailyWeatherIcon} />
-          <WeeklyWeather forecast={weeklyWeather}/>
-        </>
-      ) : (
-        <p>Loading Weather Data...</p>
-      )}
+      <div className="container">
+        <h1>Dashboard</h1>
+        <h2>Hello, {name}</h2>
+        <p>{quote}</p>
+        <div className="row">
+          {dailyWeather !== null ? (
+            <>
+              <h3>Here is today's weather for {dailyWeather.name}</h3>
+              <div className="col">
+                <DailyWeather
+                  todaysweather={dailyWeather}
+                  icon={dailyWeatherIcon}
+                />
+              </div>
+            </>
+          ) : (
+            <p>Loading Weather Data...</p>
+          )}
+          <div className="col">
+            <Iframe todaysweather={dailyWeather} />
+          </div>
+        </div>
+        {weeklyWeather.length > 0 ? (
+          <>
+            <h3>Your Weekly Forecast</h3>
+            <WeeklyWeather forecast={weeklyWeather} />
+          </>
+        ) : (
+          <p>Loading Weekly Forecast...</p>
+        )}
 
-      <button type="button" onClick={(event) => logout(event)}>
-        Logout
-      </button>
+        <button type="button" onClick={(event) => logout(event)}>
+          Logout
+        </button>
+      </div>
     </>
   );
 };
