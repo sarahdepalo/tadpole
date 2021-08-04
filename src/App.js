@@ -10,6 +10,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import { toast } from "react-toastify"; // a library for cool popups/notifications
 import "react-toastify/dist/ReactToastify.css";
+// import Iframe from './components/Iframe';
 import "./App.css";
 
 toast.configure();
@@ -49,6 +50,7 @@ function App() {
           <Switch>
             <Route exact path="/">
               <h1>Tadpole</h1>
+              {/* <Iframe/> */}
             </Route>
             <Route
               exact

@@ -8,8 +8,8 @@ const Register = ({ setAuth }) => {
     lastName: "",
     email: "",
     password: "",
-    primaryLocationState: "",
     primaryLocationCity: "",
+    primaryLocationState: "",
     primaryLocationZip: "",
   });
 
@@ -18,8 +18,8 @@ const Register = ({ setAuth }) => {
     lastName,
     email,
     password,
-    primaryLocationState,
     primaryLocationCity,
+    primaryLocationState,
     primaryLocationZip,
   } = inputs;
 
@@ -36,8 +36,8 @@ const Register = ({ setAuth }) => {
       lastName,
       email,
       password,
-      primaryLocationState,
       primaryLocationCity,
+      primaryLocationState,
       primaryLocationZip,
     };
 
@@ -48,16 +48,21 @@ const Register = ({ setAuth }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
+      localStorage.clear();
+      console.log(response.status);
 
-      const parseRes = await response.json(); //need this so we can use the data. Should give us our jwt token
+      if (response.status !== 401) {
+        const parseRes = await response.json(); //need this so we can use the data. Should give us our jwt token
+        console.log(parseRes);
 
-      if (parseRes.token) {
-        localStorage.setItem("token", parseRes.token); //sets our jwt token in our local storage!
-        setAuth(true);
-        toast.success("Registered Successfully!");
+        if (parseRes.token) {
+          localStorage.setItem("token", parseRes.token); //sets our jwt token in our local storage!
+          setAuth(true);
+          toast.success("Registered Successfully!");
+        }
       } else {
         setAuth(false);
-        toast.error(parseRes);
+        toast.error("A user with that email already exists");
       }
     } catch (error) {
       console.error(error.message);
@@ -69,7 +74,7 @@ const Register = ({ setAuth }) => {
       <h1>Register</h1>
       <form onSubmit={onSubmit}>
         <label>
-            Enter Your First Name:
+          Enter Your First Name:
           <input
             type="text"
             name="firstName"
@@ -82,7 +87,7 @@ const Register = ({ setAuth }) => {
 
         <br />
         <label>
-            Enter Your Last Name:
+          Enter Your Last Name:
           <input
             type="text"
             name="lastName"
@@ -94,7 +99,7 @@ const Register = ({ setAuth }) => {
         </label>
         <br />
         <label>
-            Enter Your Email:
+          Enter Your Email:
           <input
             type="email"
             name="email"
@@ -104,9 +109,9 @@ const Register = ({ setAuth }) => {
             required
           />
         </label>
-        <br/>
+        <br />
         <label>
-            Enter a Password:
+          Enter a Password:
           <input
             type="password"
             name="password"
@@ -118,19 +123,7 @@ const Register = ({ setAuth }) => {
         </label>
         <br />
         <label>
-            Enter the information for your default location:
-            State:
-          <input
-            type="text"
-            name="primaryLocationState"
-            placeholder="New York"
-            value={primaryLocationState}
-            onChange={(event) => onChange(event)}
-            required
-          />
-        </label>
-        <label>
-            City:
+          Enter the information for your default location: City:
           <input
             type="text"
             name="primaryLocationCity"
@@ -141,7 +134,18 @@ const Register = ({ setAuth }) => {
           />
         </label>
         <label>
-            Zipcode:
+          State:
+          <input
+            type="text"
+            name="primaryLocationState"
+            placeholder="New York"
+            value={primaryLocationState}
+            onChange={(event) => onChange(event)}
+            required
+          />
+        </label>
+        <label>
+          Zipcode:
           <input
             type="number"
             name="primaryLocationZip"
