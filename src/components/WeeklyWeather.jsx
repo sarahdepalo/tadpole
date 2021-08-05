@@ -1,12 +1,13 @@
 import { useState } from "react";
 
-const WeeklyWeather = ({ forecast }) => {
-  //to do: convert the dates into days of the week.
-  //Write a ternary statement for if % of rain < show a certain icon
-  //fix the date implementation below
-  //Add an image for each day of the week based on the weather
-  const [displayMore, setDisplayMore] = useState(false);
+//to do: convert the dates into days of the week.
+//Write a ternary statement for if % of rain < show a certain icon
+//fix the date implementation below
+//Add an image for each day of the week based on the weather
 
+const WeeklyWeather = ({ forecast }) => {
+  const [displayMore, setDisplayMore] = useState(false);
+  // console.log(typeof forecast)
   // let dates = [];
   // forecast.forEach((day) => {
   //   dates.push(day.date);
@@ -39,7 +40,6 @@ const WeeklyWeather = ({ forecast }) => {
   // };
 
   // returnDate(dates);
-  // console.log("US dates are now: ", dayNames);
 
   const handleClick = () => {
     setDisplayMore(!displayMore);
@@ -49,23 +49,37 @@ const WeeklyWeather = ({ forecast }) => {
   return (
     <>
       <div className="row">
-        {forecast.map((day, index) => (
-          <>
-            <div key={index} className="col">
-              <h4>{day.date}</h4>
-              <p>{day.Timeframes[0].wx_desc}</p>
-              <p>High of: {day.temp_max_f}°</p>
-              <p>Low of: {day.temp_min_f}°</p>
-              <p onClick={handleClick} className={!displayMore ? "active" : "hidden"}>View More</p>
-              <div className={!!displayMore ? "active" : "hidden"}>
-                <p>Chance of rain: {day.prob_precip_pct}%</p>
-                <p>Sunrise: {day.sunrise_time}</p>
-                <p>Sunset: {day.sunset_time}</p>
-                <p onClick={handleClick} className={!!displayMore ? "active" : "hidden"}>View Less</p>
+        <>
+          {forecast.map((day) => (
+            <>
+              <div className="col weeklyWeather">
+                <p>{day.date}</p>
+                <img src={day.day.condition.icon} />
+                <p>{day.day.condition.text}</p>
+                <p>High of: {day.day.maxtemp_f}°</p>
+              <p>Low of: {day.day.mintemp_f}°</p>
+                <p
+                  onClick={handleClick}
+                  className={!displayMore ? "active viewMore" : "hidden"}
+                >
+                  View More
+                </p>
+                <div className={!!displayMore ? "active" : "hidden"}>
+                  <p>Chance of rain: {day.day.daily_chance_of_rain}%</p>
+                <p>Sunrise: {day.astro.sunrise}</p>
+                <p>Sunset: {day.astro.sunset}</p>
+                <p>Moon Phase: {day.astro.moon_phase}</p>
+                  <p
+                    onClick={handleClick}
+                    className={!!displayMore ? "active viewMore" : "hidden"}
+                  >
+                    View Less
+                  </p>
+                </div>
               </div>
-            </div>
-          </>
-        ))}
+            </>
+          ))}
+        </>
       </div>
     </>
   );

@@ -3,13 +3,15 @@ const DailyWeather = ({ todaysweather, icon }) => {
   console.log("icon:", icon);
   return (
     <>
-      <div className="dailyWeatherContainer col">
+      <div className="dailyWeatherContainer">
         <img src={icon} alt="weather icon" className="dailyWeatherIcon" />
-        <div className="col">
+          <h2>{todaysweather?.main?.temp}°</h2>
           <p>{todaysweather?.weather[0]?.description}</p>
-          <p>{todaysweather?.main?.temp}°</p>
           <p>Feels Like {todaysweather?.main?.feels_like}°</p>
-        </div>
+          <p>High of {todaysweather?.main?.temp_max}</p>
+          <p>Low of {todaysweather?.main?.temp_min}</p>
+          <p>Humidity: {todaysweather?.main?.humidity}%</p>
+          <p>Wind: {todaysweather?.wind?.speed}mph</p>
       </div>
     </>
   );

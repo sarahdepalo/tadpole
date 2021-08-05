@@ -9,7 +9,7 @@ const Dashboard = ({ setAuth }) => {
   const [zipcode, setZipcode] = useState("");
   const [dailyWeather, setDailyWeather] = useState(null);
   const [dailyWeatherIcon, setDailyWeatherIcon] = useState("");
-  const [weeklyWeather, setWeeklyWeather] = useState([]);
+  const [weeklyWeather, setWeeklyWeather] = useState({});
 
   //Weather unlocked keys & stuff -- Not working need to fix and replace stuff later
   const APP_ID = process.env.REACT_APP_ID;
@@ -51,11 +51,11 @@ const Dashboard = ({ setAuth }) => {
 
   const fetchWeeklyWeather = async (zipcode) => {
     const response = await fetch(
-      `http://api.weatherunlocked.com/api/forecast/us.${zipcode}?app_id=5b784a4c&app_key=284ee951bf61c4d6a14ed1d37a4f75ba`
+      `http://api.weatherapi.com/v1/forecast.json?key=6bdf48c908e14b99bf5135122210508&q=${zipcode}&days=7&aqi=no&alerts=no`
     ).then((response) => response.json());
 
-    console.log("WeeklyWeather Response: ", response);
-    setWeeklyWeather(response.Days);
+    console.log("WeeklyWeather Response: ", response.forecast.forecastday);
+    setWeeklyWeather(response.forecast.forecastday);
   };
 
   useEffect(() => {
@@ -90,7 +90,7 @@ const Dashboard = ({ setAuth }) => {
         <div className="row">
           {dailyWeather !== null ? (
             <>
-              <h3>Here is today's weather for {dailyWeather.name}</h3>
+              <h3>Today's Weather for {dailyWeather.name}</h3>
               <div className="col">
                 <DailyWeather
                   todaysweather={dailyWeather}
@@ -105,7 +105,7 @@ const Dashboard = ({ setAuth }) => {
             <Iframe todaysweather={dailyWeather} />
           </div>
         </div>
-        {weeklyWeather.length > 0 ? (
+        {weeklyWeather !== null ? (
           <>
             <h3>Your Weekly Forecast</h3>
             <WeeklyWeather forecast={weeklyWeather} />
