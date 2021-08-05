@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import DailyWeather from "./DailyWeather";
 import WeeklyWeather from "./WeeklyWeather";
 import Iframe from "./Iframe";
+import SearchForm from './SearchForm';
 
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
@@ -11,10 +12,14 @@ const Dashboard = ({ setAuth }) => {
   const [dailyWeatherIcon, setDailyWeatherIcon] = useState("");
   const [dailyDescription, setDailyDescription] = useState("");
   const [weeklyWeather, setWeeklyWeather] = useState({});
+  const [savedLocation, setSavedLocation] = useState(true);
+  const [savedCity, setSavedCity] = useState("");
 
   //Weather unlocked keys & stuff -- Not working need to fix and replace stuff later
-  const APP_ID = process.env.REACT_APP_ID;
-  const APP_KEY = process.env.REACT_APP_KEY;
+  // const APP_ID = process.env.REACT_APP_ID;
+  // const APP_KEY = process.env.REACT_APP_KEY;
+
+  //Initial userInfo fetch
 
   const getUserInfo = async () => {
     // Accesses our server and gets us user information
@@ -28,7 +33,8 @@ const Dashboard = ({ setAuth }) => {
 
       setName(response.firstname);
       setZipcode(response.primarylocationzip);
-
+      setSavedCity(response.primarylocationcity);
+      console.log("SAVED CITY IS: ", savedCity);
       fetchDailyWeather(response.primarylocationzip);
       fetchWeeklyWeather(response.primarylocationzip);
     } catch (error) {
@@ -36,13 +42,18 @@ const Dashboard = ({ setAuth }) => {
     }
   };
 
+  //Daily Weather
+
   const fetchDailyWeather = async (zipcode) => {
+    console.log("Zipcode:", zipcode);
     const response = await fetch(
       `http://api.openweathermap.org/data/2.5/weather?zip=${zipcode}&appid=c58c3fb30ceedded908944ec0edfb311&units=imperial`
     ).then((response) => response.json());
     console.log("Daily WEather:", typeof response);
     setDailyWeather(response);
   };
+
+  //Weekly Weather
 
   const fetchWeeklyWeather = async (zipcode) => {
     const response = await fetch(
@@ -78,12 +89,31 @@ const Dashboard = ({ setAuth }) => {
 
   let quote = inspoQuotes[Math.floor(Math.random() * inspoQuotes.length)];
 
+  //Display button for weather for home
+  const savedLocationButton = (boolean) => {
+    setSavedLocation(boolean);
+  }
+
+  const revertToHomeLocation = () => {
+    setSavedLocation(true);  
+    getUserInfo();   
+  }
+
   return (
     <>
       <div className="container">
         <h1>Dashboard</h1>
         <h2>Hello, {name}</h2>
         <p>{quote}</p>
+        <SearchForm
+          fetchDailyWeather={fetchDailyWeather}
+          fetchWeeklyWeather={fetchWeeklyWeather}
+          savedLocationButton={savedLocationButton}
+        />
+        {!savedLocation ? (
+        <button type="button" className="btn2" onClick={revertToHomeLocation} >Get Weather for {savedCity}</button>
+        ): null}
+
         <div className="row">
           {dailyWeather !== null ? (
             <>

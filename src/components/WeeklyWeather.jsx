@@ -44,7 +44,7 @@ const WeeklyWeather = ({ forecast }) => {
       <div className="row">
           {forecast.map((day, index) => (
               <WeatherCard 
-              key={index}
+              index={index}
               date={day.date}
               icon={day.day.condition.icon}
               condition={day.day.condition.text}

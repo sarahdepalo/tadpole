@@ -20,7 +20,7 @@ const Iframe = ({ todaysweather }) => {
 
   let mainPlaylistGroup;
 
-  if (description === "clear sky" || "few clouds" || temperature > 75) {
+  if (description === "clear sky" || "few clouds" || temperature > 80) {
     mainPlaylistGroup = sunnyPlaylists;
   } else {
     if (

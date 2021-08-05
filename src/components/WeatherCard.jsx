@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const WeatherCard = ({
-  key,
+  index,
   date,
   icon,
   condition,
@@ -20,7 +20,7 @@ const WeatherCard = ({
   };
 
   return (
-    <div className="col weeklyWeather" key={key}>
+    <div className="col weeklyWeather" key={index}>
       <h4>{date}</h4>
       <img src={icon} alt="weather icon" />
       <p>{condition}</p>
