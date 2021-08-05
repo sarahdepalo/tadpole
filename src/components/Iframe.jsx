@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 
 const Iframe = ({ todaysweather }) => {
-  //To do:
-  // Give the user the option to get a new random playlist
-  //Finish making the playlists
 
   const [playlist, setPlaylist] = useState("");
 
@@ -67,7 +64,7 @@ const Iframe = ({ todaysweather }) => {
     const newWindow = window.open('https://open.spotify.com/user/vnodo8ult3p0a9uhz5nl55478?si=469f02e696a244dc', '_blank', 'noopener,noreferrer')
     if (newWindow) newWindow.opener = null
   };
-  
+
   return (
     <>
       <div className="spotifyContainer">
