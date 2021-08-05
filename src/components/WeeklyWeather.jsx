@@ -50,11 +50,11 @@ const WeeklyWeather = ({ forecast }) => {
     <>
       <div className="row">
         <>
-          {forecast.map((day) => (
+          {forecast.map((day, index) => (
             <>
-              <div className="col weeklyWeather">
+              <div className="col weeklyWeather" key={index}>
                 <p>{day.date}</p>
-                <img src={day.day.condition.icon} />
+                <img src={day.day.condition.icon} alt="weather icon"/>
                 <p>{day.day.condition.text}</p>
                 <p>High of: {day.day.maxtemp_f}°</p>
               <p>Low of: {day.day.mintemp_f}°</p>
@@ -64,7 +64,7 @@ const WeeklyWeather = ({ forecast }) => {
                 >
                   View More
                 </p>
-                <div className={!!displayMore ? "active" : "hidden"}>
+                <div className={!!displayMore ? "active" : "hidden"} key={day.date}>
                   <p>Chance of rain: {day.day.daily_chance_of_rain}%</p>
                 <p>Sunrise: {day.astro.sunrise}</p>
                 <p>Sunset: {day.astro.sunset}</p>

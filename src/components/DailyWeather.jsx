@@ -1,12 +1,12 @@
-const DailyWeather = ({ todaysweather, icon }) => {
+const DailyWeather = ({ todaysweather, icon, description }) => {
   console.log("Daily Weather:", todaysweather);
   console.log("icon:", icon);
   return (
     <>
       <div className="dailyWeatherContainer">
         <img src={icon} alt="weather icon" className="dailyWeatherIcon" />
-          <h2>{todaysweather?.main?.temp}°</h2>
-          <p>{todaysweather?.weather[0]?.description}</p>
+          <p>{description}</p>
+          <h3>{todaysweather?.main?.temp}°</h3>
           <p>Feels Like {todaysweather?.main?.feels_like}°</p>
           <p>High of {todaysweather?.main?.temp_max}</p>
           <p>Low of {todaysweather?.main?.temp_min}</p>

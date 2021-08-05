@@ -9,6 +9,7 @@ const Dashboard = ({ setAuth }) => {
   const [zipcode, setZipcode] = useState("");
   const [dailyWeather, setDailyWeather] = useState(null);
   const [dailyWeatherIcon, setDailyWeatherIcon] = useState("");
+  const [dailyDescription, setDailyDescription] = useState("");
   const [weeklyWeather, setWeeklyWeather] = useState({});
 
   //Weather unlocked keys & stuff -- Not working need to fix and replace stuff later
@@ -40,13 +41,7 @@ const Dashboard = ({ setAuth }) => {
       `http://api.openweathermap.org/data/2.5/weather?zip=${zipcode}&appid=c58c3fb30ceedded908944ec0edfb311&units=imperial`
     ).then((response) => response.json());
     console.log("Daily WEather:", typeof response);
-
-    if (response.cod !== "400") {
-      setDailyWeather(response);
-      setDailyWeatherIcon(
-        `http://openweathermap.org/img/w/${response.weather[0].icon}.png`
-      );
-    }
+    setDailyWeather(response);
   };
 
   const fetchWeeklyWeather = async (zipcode) => {
@@ -56,6 +51,8 @@ const Dashboard = ({ setAuth }) => {
 
     console.log("WeeklyWeather Response: ", response.forecast.forecastday);
     setWeeklyWeather(response.forecast.forecastday);
+    setDailyWeatherIcon(response.current.condition.icon);
+    setDailyDescription(response.current.condition.text);
   };
 
   useEffect(() => {
@@ -95,6 +92,7 @@ const Dashboard = ({ setAuth }) => {
                 <DailyWeather
                   todaysweather={dailyWeather}
                   icon={dailyWeatherIcon}
+                  description={dailyDescription}
                 />
               </div>
             </>
@@ -105,7 +103,7 @@ const Dashboard = ({ setAuth }) => {
             <Iframe todaysweather={dailyWeather} />
           </div>
         </div>
-        {weeklyWeather !== null ? (
+        {weeklyWeather.length > 0 ? (
           <>
             <h3>Your Weekly Forecast</h3>
             <WeeklyWeather forecast={weeklyWeather} />
