@@ -1,23 +1,24 @@
 import { useState, useEffect } from "react";
-import { toast } from "react-toastify";
 import DailyWeather from "./DailyWeather";
 import WeeklyWeather from "./WeeklyWeather";
 import Iframe from "./Iframe";
-import SearchForm from './SearchForm';
+import SearchForm from "./SearchForm";
 
-const Dashboard = ({ setAuth }) => {
+const Dashboard = () => {
+  //USER
   const [name, setName] = useState("");
   const [zipcode, setZipcode] = useState("");
+  const [savedLocation, setSavedLocation] = useState(true);
+  const [savedCity, setSavedCity] = useState("");
+  //API
   const [dailyWeather, setDailyWeather] = useState(null);
   const [dailyWeatherIcon, setDailyWeatherIcon] = useState("");
   const [dailyDescription, setDailyDescription] = useState("");
-  const [weeklyWeather, setWeeklyWeather] = useState({});
-  const [savedLocation, setSavedLocation] = useState(true);
-  const [savedCity, setSavedCity] = useState("");
+  const [weeklyWeather, setWeeklyWeather] = useState(null);
 
-  //Weather unlocked keys & stuff -- Not working need to fix and replace stuff later
-  // const APP_ID = process.env.REACT_APP_ID;
-  // const APP_KEY = process.env.REACT_APP_KEY;
+  //API Stuff:
+  // const open_weather_key = process.env.REACT_APP_WEATHER_KEY;
+  // const weather_api_key = process.env.REACT_APP_WEATHER_API_KEY
 
   //Initial userInfo fetch
 
@@ -36,7 +37,6 @@ const Dashboard = ({ setAuth }) => {
       setSavedCity(response.primarylocationcity);
       console.log("SAVED CITY IS: ", savedCity);
       fetchDailyWeather(response.primarylocationzip);
-      fetchWeeklyWeather(response.primarylocationzip);
     } catch (error) {
       console.error(error.message);
     }
@@ -51,32 +51,39 @@ const Dashboard = ({ setAuth }) => {
     ).then((response) => response.json());
     console.log("Daily WEather:", typeof response);
     setDailyWeather(response);
+
+    //icon & desc for daily:
+    const iconRes = await fetch(
+      `http://api.weatherapi.com/v1/forecast.json?key=6bdf48c908e14b99bf5135122210508&q=${zipcode}&days=7&aqi=no&alerts=no`
+    ).then((iconRes) => iconRes.json());
+    //just a personal preference. I liked the icon and text of this api better, but it only does daily :(
+    setDailyWeatherIcon(iconRes.current.condition.icon);
+    setDailyDescription(iconRes.current.condition.text);
+
+    //get the lat and long from the zipcode and then send to weekly weather (requires zipcode)
+    const {lat, lon} = response.coord;
+    console.log("LATITUDE AND LONGITUDE:", lat, lon)
+    fetchWeeklyWeather(lat, lon);
   };
 
   //Weekly Weather
 
-  const fetchWeeklyWeather = async (zipcode) => {
-    const response = await fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=6bdf48c908e14b99bf5135122210508&q=${zipcode}&days=7&aqi=no&alerts=no`
-    ).then((response) => response.json());
+  const fetchWeeklyWeather = async (latitude, longitude) => {
+    if (latitude !== null && longitude !== null) {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=3c2facbbe498e0468ed6e5b436dcc588&cnt=7&exclude=current,minutely,hourly&units=imperial`
+      ).then((response) => response.json());
+      console.log("Fetch WEEKLY WEATHER RESPONSE: ", response)
+      const fullWeek = response.daily.slice(1);
+      setWeeklyWeather(fullWeek)
 
-    console.log("WeeklyWeather Response: ", response.forecast.forecastday);
-    setWeeklyWeather(response.forecast.forecastday);
-    setDailyWeatherIcon(response.current.condition.icon);
-    setDailyDescription(response.current.condition.text);
+    }
+
   };
 
   useEffect(() => {
     getUserInfo();
   }, []);
-
-  //removes the stored token and logs user out
-  const logout = (event) => {
-    event.preventDefault();
-    localStorage.removeItem("token");
-    setAuth(false);
-    toast.success("Logged Out Successfully");
-  };
 
   //Inspirational quotes
   const inspoQuotes = [
@@ -92,12 +99,12 @@ const Dashboard = ({ setAuth }) => {
   //Display button for weather for home
   const savedLocationButton = (boolean) => {
     setSavedLocation(boolean);
-  }
+  };
 
   const revertToHomeLocation = () => {
-    setSavedLocation(true);  
-    getUserInfo();   
-  }
+    setSavedLocation(true);
+    getUserInfo();
+  };
 
   return (
     <>
@@ -107,12 +114,13 @@ const Dashboard = ({ setAuth }) => {
         <p>{quote}</p>
         <SearchForm
           fetchDailyWeather={fetchDailyWeather}
-          fetchWeeklyWeather={fetchWeeklyWeather}
           savedLocationButton={savedLocationButton}
         />
         {!savedLocation ? (
-        <button type="button" className="btn2" onClick={revertToHomeLocation} >Get Weather for {savedCity}</button>
-        ): null}
+          <button type="button" className="btn2" onClick={revertToHomeLocation}>
+            Get Weather for {savedCity}
+          </button>
+        ) : null}
 
         <div className="row">
           {dailyWeather !== null ? (
@@ -130,10 +138,14 @@ const Dashboard = ({ setAuth }) => {
             <p>Loading Weather Data...</p>
           )}
           <div className="col">
-            <Iframe todaysweather={dailyWeather} />
+            {dailyWeather !== null ? (
+              <Iframe todaysweather={dailyWeather} />
+            ) : (
+              <p>Loading music...</p>
+            )}
           </div>
         </div>
-        {weeklyWeather.length > 0 ? (
+        {weeklyWeather !== null ? (
           <>
             <h3>Your Weekly Forecast</h3>
             <WeeklyWeather forecast={weeklyWeather} />
@@ -141,10 +153,6 @@ const Dashboard = ({ setAuth }) => {
         ) : (
           <p>Loading Weekly Forecast...</p>
         )}
-
-        <button type="button" onClick={(event) => logout(event)}>
-          Logout
-        </button>
       </div>
     </>
   );
