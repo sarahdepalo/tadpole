@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 
 const Iframe = ({ todaysweather }) => {
+  //in order to update for each serach, might have to do some sort of fetch
 
   const [playlist, setPlaylist] = useState("");
+  const [playlistGroup, setPlaylistGroup] = useState([]);
+  const [descriptor, setDescriptor] = useState("");
 
   const temperature = todaysweather?.main?.temp;
   const description = todaysweather?.weather[0]?.description;
-  console.log("Today's Temperature", temperature, description);
 
   const sunnyPlaylists = [
     "0LXHPX3maaIvca0IHhzZ5w",
@@ -18,44 +20,47 @@ const Iframe = ({ todaysweather }) => {
 
   const snowyPlaylists = ["1i0db1elTpgAVB8ijYRlmS"];
 
-  let mainPlaylistGroup;
-
-  if (description === "clear sky" || "few clouds" || temperature > 80) {
-    mainPlaylistGroup = sunnyPlaylists;
-  } else {
-    if (
-      description === "scattered clouds" ||
-      "broken clouds" ||
-      "shower rain" ||
-      "rain" ||
-      "thunderstorm"
-    ) {
-      mainPlaylistGroup = rainyPlaylists;
-    } else {
-      if (description === "snow" || "mist" || temperature < 35) {
-        mainPlaylistGroup = snowyPlaylists;
-      }
-    }
-  }
-
   const setInitialPlaylist = () => {
+    let initialPlaylists
+    if ((description === "few clouds" || description === "clear sky" || description === "broken clouds") && (temperature > 80)) {
+      initialPlaylists = sunnyPlaylists;
+      setDescriptor("nice sunny")
+    } else {
+      if (
+        description === "scattered clouds" ||
+        description === "shower rain" ||
+        description === "rain" ||
+       description === "thunderstorm" ||
+        description === "overcast clouds"
+      ) {
+        initialPlaylists = rainyPlaylists;
+        setDescriptor("rainy")
+      } else {
+        if ((description === "snow" || "mist" ) && ( temperature < 35)) {
+          initialPlaylists = snowyPlaylists;
+          setDescriptor("snowy")
+        }
+      }
+    };
+
+    setPlaylistGroup(initialPlaylists);
+
     let randomPlaylist =
-      mainPlaylistGroup[Math.floor(Math.random() * mainPlaylistGroup.length)];
-    console.log("Random Playlist:", randomPlaylist);
+    initialPlaylists[Math.floor(Math.random() * initialPlaylists.length)];
+
     let startingPlaylist = `https://open.spotify.com/embed/playlist/${randomPlaylist}`;
     setPlaylist(startingPlaylist);
-  };
 
+  };
 
   useEffect(() => {
     setInitialPlaylist();
-  }, []);
+  }, [description]);
 
 
-  const shufflePlaylists = () => {
+  const shufflePlaylists = (playlists) => {
     let randomPlaylist =
-      mainPlaylistGroup[Math.floor(Math.random() * mainPlaylistGroup.length)];
-    console.log("Random Playlist:", randomPlaylist);
+      playlists[Math.floor(Math.random() * playlists.length)];
    let newPlaylist = `https://open.spotify.com/embed/playlist/${randomPlaylist}`;
     setPlaylist(newPlaylist)
   };
@@ -79,9 +84,9 @@ const Iframe = ({ todaysweather }) => {
           className="spotify"
         ></iframe>
         <div className="exploreContainer">
-          <p>Looks like a good day. Enjoy some nice music with the weather.</p>
+          <p>Looks like a {descriptor} day. Enjoy some music with the weather.</p>
           <div className="buttonContainer">
-            <button type="button" className="btn2" onClick={shufflePlaylists}>
+            <button type="button" className="btn2" onClick={() => shufflePlaylists(playlistGroup)}>
               GET A NEW PLAYLIST
             </button>
             <button type="button" className="btn2" onClick={openSpotify}>

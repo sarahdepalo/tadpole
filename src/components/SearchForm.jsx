@@ -3,7 +3,6 @@ import {useState} from 'react';
 const SearchForm = ({fetchDailyWeather, savedLocationButton, fetchWeeklyWeather}) => {
   const [input, setInput] = useState("");
 
-
   const handleChange = (event) => {
     console.log('Input is: ', input);
     parseInt(event.target.value)
@@ -14,7 +13,6 @@ const SearchForm = ({fetchDailyWeather, savedLocationButton, fetchWeeklyWeather}
     event.preventDefault();
     setInput('');
     fetchDailyWeather(input);
-    fetchWeeklyWeather(input);
     savedLocationButton(false)
   }
 

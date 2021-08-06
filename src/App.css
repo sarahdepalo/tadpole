@@ -1,3 +1,11 @@
+* {
+  box-sizing: border-box;
+ }
+ *:before,
+ *:after {
+  box-sizing: border-box;
+ }
+
 body {
   background-color: #f6f8fa;
 }
@@ -6,20 +14,29 @@ body {
   display: none;
 }
 
-nav {
+.navbar {
   margin-bottom: 55px;
+}
+
+.bg-light{
+  background-color: white !important;
 }
 
 .registerContainer {
   background: url('./imgs/sun_and_clouds.jpeg') no-repeat center center fixed;
   background-size:cover;
-  color: white;
   border-radius: 20px;
   padding: 15px;
   box-shadow: 0px 15px 20px rgba(148, 148, 148, 0.671);
   width: 900px;
   margin: 0 auto;
-  color: rgb(75, 75, 75);
+  color: rgb(102, 102, 102);
+}
+
+.registerContainer a {
+  color: rgb(102, 102, 102);
+  text-decoration: none;
+  margin: 20px;
 }
 
 .registerContainer form {
@@ -29,6 +46,36 @@ nav {
 
 .registerContainer h1 {
   margin: 20px;
+}
+
+.loginContainer {
+  background: url('./imgs/mountain.jpeg') no-repeat center bottom fixed;
+  background-size:cover;
+  border-radius: 20px;
+  padding: 15px;
+  box-shadow: 0px 15px 20px rgba(148, 148, 148, 0.671);
+  width: 900px;
+  margin: 0 auto;
+  color: rgb(102, 102, 102);
+  height: 400px
+}
+
+
+.loginContainer form, a {
+  margin: 20px;
+}
+
+.loginContainer h1 {
+  margin: 20px;
+}
+
+.loginContainer label {
+  display: block;
+}
+
+.loginContainer a {
+  color: rgb(102, 102, 102);
+  text-decoration: none;
 }
 
 .spotifyContainer {
@@ -129,8 +176,17 @@ nav {
 
 }
 
+.weeklyIcon {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height: 70px;
+}
+
 .weeklyWeather p, h4 {
   text-align: center;
+  text-transform: capitalize;
 }
 
 .weeklyWeather h4 {
@@ -177,6 +233,37 @@ nav {
 
 }
 
+/* FOOTER */
+html,
+body {
+ height: 100%;
+ position: relative;
+}
+.App {
+ min-height: 100vh; /* will cover the 100% of viewport */
+ overflow: hidden;
+ display: block;
+ position: relative;
+ padding-bottom: 100px; /* height of your footer */
+}
+footer {
+ position: absolute;
+ bottom: 0;
+ width: 100%;
+}
+
+footer img {
+  height: 40px;
+  margin-right: 25px;
+  margin-bottom: 10px;
+}
+
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  
+}
+
 /* Mobile Responsiveness */
 @media screen and (max-width: 960px) {
   .row {
@@ -201,12 +288,12 @@ nav {
 
   .registerContainer {
     width: auto;
-    background: url('./imgs/sun_and_clouds.jpeg') no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
     margin-bottom: 50px;
+  }
+
+  .loginContainer {
+    margin-bottom: 50px;
+    width:auto;
   }
 
   .registerContainer input {

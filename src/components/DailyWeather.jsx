@@ -8,8 +8,8 @@ const DailyWeather = ({ todaysweather, icon, description }) => {
           <p>{description}</p>
           <h3>{todaysweather?.main?.temp}°</h3>
           <p>Feels Like {todaysweather?.main?.feels_like}°</p>
-          <p>High of {todaysweather?.main?.temp_max}</p>
-          <p>Low of {todaysweather?.main?.temp_min}</p>
+          <p>High of {todaysweather?.main?.temp_max}°</p>
+          <p>Low of {todaysweather?.main?.temp_min}°</p>
           <p>Humidity: {todaysweather?.main?.humidity}%</p>
           <p>Wind: {todaysweather?.wind?.speed}mph</p>
       </div>

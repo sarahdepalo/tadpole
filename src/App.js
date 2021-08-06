@@ -8,9 +8,11 @@ import { useState, useEffect } from "react";
 import Dashboard from "./components/Dashboard";
 import Register from "./components/Register";
 import Login from "./components/Login";
-import Navbar from './components/Navbar';
-import { toast } from "react-toastify"; 
+import Navbar from "./components/Navbar";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import github from "./imgs/github.png";
+import linkedin from "./imgs/linkedin.png";
 import "./App.css";
 
 toast.configure();
@@ -42,11 +44,29 @@ function App() {
     isAuth();
   });
 
+  const openGitHub = () => {
+    const newWindow = window.open(
+      "https://github.com/sarahdepalo",
+      "_blank",
+      "noopener,noreferrer"
+    );
+    if (newWindow) newWindow.opener = null;
+  };
+
+  const openLinkedIn = () => {
+    const newWindow = window.open(
+      "https://www.linkedin.com/in/sarahdepalo/",
+      "_blank",
+      "noopener,noreferrer"
+    );
+    if (newWindow) newWindow.opener = null;
+  };
+
   //Render is used below so that that the component doesn't have to keep remounting
   return (
     <div className="App">
       <Router>
-      <Navbar setAuth={setAuth}/>
+        <Navbar setAuth={setAuth} />
         <div className="container">
           <Switch>
             <Route exact path="/">
@@ -88,6 +108,12 @@ function App() {
           </Switch>
         </div>
       </Router>
+      <footer>
+        <div className="iconContainer">
+          <img src={github} alt="github icon" onClick={openGitHub} />
+          <img src={linkedin} alt="LinkedIn icon" onClick={openLinkedIn} />
+        </div>
+      </footer>
     </div>
   );
 }

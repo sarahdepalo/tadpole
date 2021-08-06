@@ -33,7 +33,6 @@ const Login = ({ setAuth }) => {
         localStorage.setItem("token", parseRes.token);
         setAuth(true);
         toast.success("Login Successful!");
-        
       } else {
         setAuth(false);
         toast.error(parseRes);
@@ -45,30 +44,46 @@ const Login = ({ setAuth }) => {
 
   return (
     <>
-      <h1>Login</h1>
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          name="email"
-          placeholder="Enter Your Email"
-          value={email}
-          onChange={(event) => onChange(event)}
-          data-testid="email"
-        />
-        <br />
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter Your Password"
-          value={password}
-          onChange={(event) => onChange(event)}
-          data-testid="password"
-        />
-        <br />
-        <button type="submit" data-testid="loginBtn">Login</button>
-      </form>
+      <div className="loginContainer">
+        <h1>Login</h1>
+        <form onSubmit={onSubmit}>
+          <div className="form-row">
+            <div className="form-group">
+              <label>
+                Email
+                <input
+                  type="text"
+                  name="email"
+                  placeholder="Enter Your Email"
+                  value={email}
+                  onChange={(event) => onChange(event)}
+                  data-testid="email"
+                  className="form-control"
+                />
+              </label>
+            </div>
+            <div className="form-group">
+              <label>
+                Password
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Enter Your Password"
+                  value={password}
+                  onChange={(event) => onChange(event)}
+                  data-testid="password"
+                  className="form-control"
+                />
+              </label>
+            </div>
+          </div>
+          <button type="submit" data-testid="loginBtn" className="registerBtn">
+            Login
+          </button>
+        </form>
 
-      <Link to="/register">Not a user? Head over to Register</Link>
+        <Link to="/register">Not a user? Click Here to Register</Link>
+      </div>
     </>
   );
 };
