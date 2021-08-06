@@ -8,9 +8,9 @@ import { useState, useEffect } from "react";
 import Dashboard from "./components/Dashboard";
 import Register from "./components/Register";
 import Login from "./components/Login";
-import { toast } from "react-toastify"; // a library for cool popups/notifications
+import Navbar from './components/Navbar';
+import { toast } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css";
-// import Iframe from './components/Iframe';
 import "./App.css";
 
 toast.configure();
@@ -46,11 +46,11 @@ function App() {
   return (
     <div className="App">
       <Router>
+      <Navbar setAuth={setAuth}/>
         <div className="container">
           <Switch>
             <Route exact path="/">
               <h1>Tadpole</h1>
-              {/* <Iframe/> */}
             </Route>
             <Route
               exact

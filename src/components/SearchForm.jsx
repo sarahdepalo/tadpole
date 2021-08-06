@@ -6,6 +6,7 @@ const SearchForm = ({fetchDailyWeather, savedLocationButton, fetchWeeklyWeather}
 
   const handleChange = (event) => {
     console.log('Input is: ', input);
+    parseInt(event.target.value)
     setInput(event.target.value)
   }
 
@@ -20,12 +21,14 @@ const SearchForm = ({fetchDailyWeather, savedLocationButton, fetchWeeklyWeather}
   return (
     <form onSubmit={(event) => handleSubmit(event)}>
       <input
-        type="number"
+        type="text"
         placeholder="Search for weather by zipcode..."
         name="zipcode"
         value={input}
         onChange={(event) => handleChange(event)}
         className="zipcodeInput"
+        maxlength="5"
+        minlength="5"
       />
     </form>
   );

@@ -71,93 +71,119 @@ const Register = ({ setAuth }) => {
 
   return (
     <>
-      <h1>Register</h1>
-      <form onSubmit={onSubmit}>
-        <label>
-          Enter Your First Name:
-          <input
-            type="text"
-            name="firstName"
-            placeholder="John"
-            value={firstName}
-            onChange={(event) => onChange(event)}
-            required
-          />
-        </label>
+      <div className="registerContainer">
+        <h1>Register</h1>
+        <form onSubmit={onSubmit}>
+          <div className="form-row">
+            <div className="form-group">
+              <label>
+                First Name
+                <input
+                  type="text"
+                  name="firstName"
+                  placeholder="John"
+                  value={firstName}
+                  onChange={(event) => onChange(event)}
+                  className="form-control"
+                  required
+                />
+              </label>
+            </div>
 
-        <br />
-        <label>
-          Enter Your Last Name:
-          <input
-            type="text"
-            name="lastName"
-            placeholder="Doe"
-            value={lastName}
-            onChange={(event) => onChange(event)}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Enter Your Email:
-          <input
-            type="email"
-            name="email"
-            placeholder="johndoe@email.com"
-            value={email}
-            onChange={(event) => onChange(event)}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Enter a Password:
-          <input
-            type="password"
-            name="password"
-            placeholder="Your Password"
-            value={password}
-            onChange={(event) => onChange(event)}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Enter the information for your default location: City:
-          <input
-            type="text"
-            name="primaryLocationCity"
-            placeholder="Buffalo"
-            value={primaryLocationCity}
-            onChange={(event) => onChange(event)}
-            required
-          />
-        </label>
-        <label>
-          State:
-          <input
-            type="text"
-            name="primaryLocationState"
-            placeholder="New York"
-            value={primaryLocationState}
-            onChange={(event) => onChange(event)}
-            required
-          />
-        </label>
-        <label>
-          Zipcode:
-          <input
-            type="number"
-            name="primaryLocationZip"
-            placeholder="14211"
-            value={primaryLocationZip}
-            onChange={(event) => onChange(event)}
-            required
-          />
-        </label>
-        <button type="submit">Register</button>
-      </form>
-      <Link to="/login">Already Registered? Click here to login.</Link>
+            <div className="form-group">
+              <label>
+                Last Name
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder="Doe"
+                  value={lastName}
+                  onChange={(event) => onChange(event)}
+                  className="form-control lastName"
+                  required
+                />
+              </label>
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="form-group">
+              <label>
+                Email
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="johndoe@email.com"
+                  value={email}
+                  onChange={(event) => onChange(event)}
+                  className="form-control"
+                  required
+                />
+              </label>
+            </div>
+            <div className="form-group">
+              <label>
+                Password
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Your Password"
+                  value={password}
+                  onChange={(event) => onChange(event)}
+                  className="form-control password"
+                  required
+                />
+              </label>
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="form-group">
+              <label>
+              City
+                <input
+                  type="text"
+                  name="primaryLocationCity"
+                  placeholder="Buffalo"
+                  value={primaryLocationCity}
+                  onChange={(event) => onChange(event)}
+                  className="form-control"
+                  required
+                />
+              </label>
+            </div>
+            <div className="form-group">
+              <label>
+                State
+                <input
+                  type="text"
+                  name="primaryLocationState"
+                  placeholder="New York"
+                  value={primaryLocationState}
+                  onChange={(event) => onChange(event)}
+                  className="form-control"
+                  required
+                />
+              </label>
+            </div>
+            <div className="form-group">
+              <label>
+                Zipcode
+                <input
+                  type="number"
+                  name="primaryLocationZip"
+                  placeholder="14211"
+                  value={primaryLocationZip}
+                  onChange={(event) => onChange(event)}
+                  className="form-control"
+                  required
+                />
+              </label>
+            </div>
+          </div>
+          <button type="submit" className="registerBtn">Register</button>
+        </form>
+        <Link to="/login">Already Registered? Click here to login.</Link>
+      </div>
+      
     </>
   );
 };
