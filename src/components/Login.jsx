@@ -52,13 +52,14 @@ const Login = ({ setAuth }) => {
               <label>
                 Email
                 <input
-                  type="text"
+                  type="email"
                   name="email"
                   placeholder="Enter Your Email"
                   value={email}
                   onChange={(event) => onChange(event)}
                   data-testid="email"
                   className="form-control"
+                  required
                 />
               </label>
             </div>
@@ -73,6 +74,7 @@ const Login = ({ setAuth }) => {
                   onChange={(event) => onChange(event)}
                   data-testid="password"
                   className="form-control"
+                  required
                 />
               </label>
             </div>

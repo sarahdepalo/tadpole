@@ -91,7 +91,7 @@ const Dashboard = () => {
     "The best revenge is massive success. -Frank Sinatra",
     "Dream big and dare to fail. -Norman Vaughan",
     "It does not matter how slowly you go as long as you do not stop. -Confucius",
-    "Don’t let yesterday take up too much of today. —Will Rogers",
+    "Don’t let yesterday take up too much of today. —Will Rogers", "The journey of a thousand miles begins with one step. -Lao Tzu"
   ];
 
   let quote = inspoQuotes[Math.floor(Math.random() * inspoQuotes.length)];
@@ -109,7 +109,6 @@ const Dashboard = () => {
   return (
     <>
       <div className="container">
-        <h1>Dashboard</h1>
         <h2>Hello, {name}</h2>
         <p>{quote}</p>
         <SearchForm

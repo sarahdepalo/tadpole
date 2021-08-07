@@ -7,7 +7,7 @@ const WeeklyWeather = ({ forecast }) => {
 
   return (
     <>
-      <div className="row">
+      <div className="row weeklyWeatherRow">
         {forecast.length > 0 ? (
           forecast.map((day, index) => (
             <WeatherCard 

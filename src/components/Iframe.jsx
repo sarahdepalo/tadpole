@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import frogs from '../imgs/singing_frogs.jpeg';
 
 const Iframe = ({ todaysweather }) => {
   //in order to update for each serach, might have to do some sort of fetch
@@ -7,8 +8,9 @@ const Iframe = ({ todaysweather }) => {
   const [playlistGroup, setPlaylistGroup] = useState([]);
   const [descriptor, setDescriptor] = useState("");
 
-  const temperature = todaysweather?.main?.temp;
+  // const temperature = todaysweather?.main?.temp;
   const description = todaysweather?.weather[0]?.description;
+  console.log(description)
 
   const sunnyPlaylists = [
     "0LXHPX3maaIvca0IHhzZ5w",
@@ -22,12 +24,11 @@ const Iframe = ({ todaysweather }) => {
 
   const setInitialPlaylist = () => {
     let initialPlaylists
-    if ((description === "few clouds" || description === "clear sky" || description === "broken clouds") && (temperature > 80)) {
+    if (description === "few clouds" || description === "clear sky" || description === "broken clouds" ||      description === "scattered clouds" ) {
       initialPlaylists = sunnyPlaylists;
       setDescriptor("nice sunny")
     } else {
       if (
-        description === "scattered clouds" ||
         description === "shower rain" ||
         description === "rain" ||
        description === "thunderstorm" ||
@@ -36,9 +37,9 @@ const Iframe = ({ todaysweather }) => {
         initialPlaylists = rainyPlaylists;
         setDescriptor("rainy")
       } else {
-        if ((description === "snow" || "mist" ) && ( temperature < 35)) {
+        if (description === "snow" || "mist") {
           initialPlaylists = snowyPlaylists;
-          setDescriptor("snowy")
+          setDescriptor("chilly")
         }
       }
     };
@@ -84,7 +85,7 @@ const Iframe = ({ todaysweather }) => {
           className="spotify"
         ></iframe>
         <div className="exploreContainer">
-          <p>Looks like a {descriptor} day. Enjoy some music with the weather.</p>
+          <p>Looks like it might be a {descriptor} day. Enjoy some music with the weather.</p>
           <div className="buttonContainer">
             <button type="button" className="btn2" onClick={() => shufflePlaylists(playlistGroup)}>
               GET A NEW PLAYLIST
@@ -92,7 +93,7 @@ const Iframe = ({ todaysweather }) => {
             <button type="button" className="btn2" onClick={openSpotify}>
               EXPLORE ALL PLAYLISTS
             </button>
-            <p>Insert cute icon here later</p>
+            <img src={frogs} alt="three frogs with musical notes above them" className="frogs"/>
           </div>
         </div>
       </div>
