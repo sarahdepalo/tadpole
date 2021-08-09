@@ -1,9 +1,3 @@
-//1. Login
-//2. Using the users primary zip code make a fetch request for the daily weather for that area
-
-//3. Do a fetch request from this url: api.openweathermap.org/data/2.5/weather?zip=34211&appid=c58c3fb30ceedded908944ec0edfb311&units=imperial 
-
-
 describe("User should be able to succesfully login and be directed to their dashboard", () => {
     beforeEach(() => {
         cy.visit("http://localhost:3001/login");
