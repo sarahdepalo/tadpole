@@ -15,10 +15,6 @@ const Dashboard = () => {
   const [dailyDescription, setDailyDescription] = useState("");
   const [weeklyWeather, setWeeklyWeather] = useState(null);
 
-  //API STUFF
-  const open_weather_key = process.env.REACT_APP_OPEN_WEATHER_KEY;
-  const weather_api_key = process.env.REACT_APP_WEATHER_API_KEY;
-
   //Initial userInfo fetch
 
   const getUserInfo = async () => {
@@ -49,7 +45,7 @@ const Dashboard = () => {
     console.log("Daily WEather:", typeof response);
     setDailyWeather(response);
 
-    //icon & desc for daily:
+    //icon & desc for daily:    
     const iconRes = await fetch(
       `http://api.weatherapi.com/v1/forecast.json?key=6bdf48c908e14b99bf5135122210508&q=${zipcode}&days=7&aqi=no&alerts=no`
     ).then((iconRes) => iconRes.json());
