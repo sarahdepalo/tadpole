@@ -407,10 +407,14 @@ footer img {
   .registerContainer {
     width: auto;
     margin-bottom: 50px;
+    margin-left: 15px;
+    margin-right: 15px;
   }
 
   .loginContainer {
     margin-bottom: 50px;
+    margin-left: 15px;
+    margin-right: 15px;
     width: auto;
   }
 
