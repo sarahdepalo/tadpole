@@ -1,6 +1,6 @@
 describe("User should be able to succesfully login and be directed to their dashboard", () => {
     beforeEach(() => {
-        cy.visit("http://localhost:3001/login");
+        cy.visit("http://localhost:3000/login");
     });
     it("Fills out the form and hits login", () => {
 
@@ -14,8 +14,6 @@ describe("User should be able to succesfully login and be directed to their dash
             .click()
         
         cy.wait(300)
-
-        cy.contains("Dashboard").should('be.visible')
 
         cy.contains("John").should('be.visible')
 

@@ -1,11 +1,11 @@
 describe("User should be able to succesfully login and be directed to their dashboard", () => {
     beforeEach(() => {
-        cy.visit("http://localhost:3001/login");
+        cy.visit("http://localhost:3000/login");
     });
     it("Fills out the form and hits login", () => {
 
         cy.get('[data-testid="email"]')
-            .type("raven@edgarallenpoe.com")
+            .type("johndoe@email.com")
 
         cy.get('[data-testid="password"]')
             .type("password")
@@ -15,9 +15,7 @@ describe("User should be able to succesfully login and be directed to their dash
         
         cy.wait(300)
 
-        cy.contains("Dashboard").should('be.visible')
-
-        cy.contains("Edgar").should('be.visible')
+        cy.contains("John")
 
     });
 
