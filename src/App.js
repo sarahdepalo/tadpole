@@ -25,7 +25,6 @@ function App() {
     setIsAuthenticated(boolean);
   };
 
-  //need a way to authenticate user even if the page is refreshed
   async function isAuth() {
     try {
       const response = await fetch("http://localhost:3000/auth/verify", {
@@ -91,7 +90,7 @@ function App() {
               !isAuthenticated ? (
                 <Register {...props} setAuth={setAuth} />
               ) : (
-                <Redirect to="/login" />
+                <Redirect to="/dashboard" />
               )
             }
           />

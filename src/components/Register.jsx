@@ -25,7 +25,6 @@ const Register = ({ setAuth }) => {
 
   const onChange = (event) => {
     setInput({ ...inputs, [event.target.name]: event.target.value });
-    console.log(event.target.value);
   };
 
   const onSubmit = async (event) => {
@@ -49,11 +48,9 @@ const Register = ({ setAuth }) => {
         body: JSON.stringify(body),
       });
       localStorage.clear();
-      console.log(response.status);
 
       if (response.status !== 401) {
         const parseRes = await response.json(); //need this so we can use the data. Should give us our jwt token
-        console.log(parseRes);
 
         if (parseRes.token) {
           localStorage.setItem("token", parseRes.token); //sets our jwt token in our local storage!

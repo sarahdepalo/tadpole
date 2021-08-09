@@ -35,8 +35,8 @@ const Dashboard = () => {
       setName(response.firstname);
       setZipcode(response.primarylocationzip);
       setSavedCity(response.primarylocationcity);
-      console.log("SAVED CITY IS: ", savedCity);
       fetchDailyWeather(response.primarylocationzip);
+
     } catch (error) {
       console.error(error.message);
     }
@@ -56,7 +56,8 @@ const Dashboard = () => {
     const iconRes = await fetch(
       `http://api.weatherapi.com/v1/forecast.json?key=6bdf48c908e14b99bf5135122210508&q=${zipcode}&days=7&aqi=no&alerts=no`
     ).then((iconRes) => iconRes.json());
-    //just a personal preference. I liked the icon and text of this api better, but it only does daily :(
+
+
     setDailyWeatherIcon(iconRes.current.condition.icon);
     setDailyDescription(iconRes.current.condition.text);
 
@@ -74,6 +75,7 @@ const Dashboard = () => {
         `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=3c2facbbe498e0468ed6e5b436dcc588&cnt=7&exclude=current,minutely,hourly&units=imperial`
       ).then((response) => response.json());
       console.log("Fetch WEEKLY WEATHER RESPONSE: ", response)
+      //fetch sets the first day to current date -this gets rid of it to avoid redundancy 
       const fullWeek = response.daily.slice(1);
       setWeeklyWeather(fullWeek)
 

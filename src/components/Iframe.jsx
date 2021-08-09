@@ -2,15 +2,12 @@ import { useState, useEffect } from "react";
 import frogs from '../imgs/singing_frogs.jpeg';
 
 const Iframe = ({ todaysweather }) => {
-  //in order to update for each serach, might have to do some sort of fetch
-
   const [playlist, setPlaylist] = useState("");
   const [playlistGroup, setPlaylistGroup] = useState([]);
   const [descriptor, setDescriptor] = useState("");
 
   // const temperature = todaysweather?.main?.temp;
   const description = todaysweather?.weather[0]?.description;
-  console.log(description)
 
   const sunnyPlaylists = [
     "0LXHPX3maaIvca0IHhzZ5w",

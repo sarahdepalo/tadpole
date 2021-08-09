@@ -28,8 +28,6 @@ const Login = ({ setAuth }) => {
       const parseRes = await response.json(); //parse our json data
 
       if (parseRes.token) {
-        console.log(parseRes);
-
         localStorage.setItem("token", parseRes.token);
         setAuth(true);
         toast.success("Login Successful!");

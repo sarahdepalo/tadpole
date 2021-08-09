@@ -1,8 +1,5 @@
 import WeatherCard from './WeatherCard';
 
-//to do: convert the dates into days of the week.
-//fix the date implementation below
-
 const WeeklyWeather = ({ forecast }) => {
 
   return (
@@ -12,7 +9,7 @@ const WeeklyWeather = ({ forecast }) => {
           forecast.map((day, index) => (
             <WeatherCard 
             index={index}
-            temp_day={day.feels_like.day}
+            temp_day={day.temp.day}
             description={day.weather[0].description}
             iconId={day.weather[0].icon}
             humidity={day.humidity}
@@ -20,7 +17,6 @@ const WeeklyWeather = ({ forecast }) => {
             maxTemp={day.temp.max}
             minTemp={day.temp.min}
             unixDate={day.dt}
-
             />
         ))
 
