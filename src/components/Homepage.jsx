@@ -6,28 +6,27 @@ import musicNote from "../imgs/musicNote.png";
 const Homepage = () => {
   const [currentSong, setCurrentSong] = useState("");
 
-  const songs = [
-    "Rollerblades - Dominic Fike",
-    "Right - Mac Miller",
-    "Nikes On - Healy",
-    "plastic door// - KennyHoopla",
-    "Sober - Joy Oladokun",
-    "CORSO - Tyler, The Creator",
-    "777 - Joji",
-    "Playing Games - Anna of the North",
-    "Hear Em Say - Logic",
-    "Rainbow Bap - Jaden",
-    "Tequila Shots - Kid Cudi",
-    "Saturn - RIZ LA VIE",
-    "NO HALO - BROCKHAMPTON",
-  ];
-
-  const getCurrentSong = () => {
-    let song = songs[Math.floor(Math.random() * songs.length)];
-    setCurrentSong(song);
-  };
-
   useEffect(() => {
+    const songs = [
+      "Rollerblades - Dominic Fike",
+      "Right - Mac Miller",
+      "Nikes On - Healy",
+      "plastic door// - KennyHoopla",
+      "Sober - Joy Oladokun",
+      "CORSO - Tyler, The Creator",
+      "777 - Joji",
+      "Playing Games - Anna of the North",
+      "Hear Em Say - Logic",
+      "Rainbow Bap - Jaden",
+      "Tequila Shots - Kid Cudi",
+      "Saturn - RIZ LA VIE",
+      "NO HALO - BROCKHAMPTON",
+    ];
+  
+    const getCurrentSong = () => {
+      let song = songs[Math.floor(Math.random() * songs.length)];
+      setCurrentSong(song);
+    };
     getCurrentSong();
   }, []);
 

@@ -9,49 +9,49 @@ const Iframe = ({ todaysweather }) => {
   // const temperature = todaysweather?.main?.temp;
   const description = todaysweather?.weather[0]?.description;
 
-  const sunnyPlaylists = [
-    "0LXHPX3maaIvca0IHhzZ5w",
-    "103vakotCcEgU3U10gdzKR",
-    "1KYA5TFAAdhp0QmbQ9pmu2",
-  ];
-
-  const rainyPlaylists = ["4mQpN5o9JWjgA2klK2kr27", "0pjlGlL6fcnReFeXJ3zn7G"];
-
-  const snowyPlaylists = ["1i0db1elTpgAVB8ijYRlmS"];
-
-  const setInitialPlaylist = () => {
-    let initialPlaylists
-    if (description === "few clouds" || description === "clear sky" || description === "broken clouds" ||      description === "scattered clouds" ) {
-      initialPlaylists = sunnyPlaylists;
-      setDescriptor("nice sunny")
-    } else {
-      if (
-        description === "shower rain" ||
-        description === "rain" ||
-       description === "thunderstorm" ||
-        description === "overcast clouds"
-      ) {
-        initialPlaylists = rainyPlaylists;
-        setDescriptor("rainy")
-      } else {
-        if (description === "snow" || "mist") {
-          initialPlaylists = snowyPlaylists;
-          setDescriptor("chilly")
-        }
-      }
-    };
-
-    setPlaylistGroup(initialPlaylists);
-
-    let randomPlaylist =
-    initialPlaylists[Math.floor(Math.random() * initialPlaylists.length)];
-
-    let startingPlaylist = `https://open.spotify.com/embed/playlist/${randomPlaylist}`;
-    setPlaylist(startingPlaylist);
-
-  };
 
   useEffect(() => {
+    const sunnyPlaylists = [
+      "0LXHPX3maaIvca0IHhzZ5w",
+      "103vakotCcEgU3U10gdzKR",
+      "1KYA5TFAAdhp0QmbQ9pmu2",
+    ];
+  
+    const rainyPlaylists = ["4mQpN5o9JWjgA2klK2kr27", "0pjlGlL6fcnReFeXJ3zn7G"];
+  
+    const snowyPlaylists = ["1i0db1elTpgAVB8ijYRlmS"];
+
+    const setInitialPlaylist = () => {
+      let initialPlaylists
+      if (description === "few clouds" || description === "clear sky" || description === "broken clouds" ||  description === "scattered clouds" ) {
+        initialPlaylists = sunnyPlaylists;
+        setDescriptor("nice sunny")
+      } else {
+        if (
+          description === "shower rain" ||
+          description === "rain" ||
+         description === "thunderstorm" ||
+          description === "overcast clouds"
+        ) {
+          initialPlaylists = rainyPlaylists;
+          setDescriptor("rainy")
+        } else {
+          if (description === "snow" || "mist") {
+            initialPlaylists = snowyPlaylists;
+            setDescriptor("chilly")
+          }
+        }
+      };
+  
+      setPlaylistGroup(initialPlaylists);
+  
+      let randomPlaylist =
+      initialPlaylists[Math.floor(Math.random() * initialPlaylists.length)];
+  
+      let startingPlaylist = `https://open.spotify.com/embed/playlist/${randomPlaylist}`;
+      setPlaylist(startingPlaylist);
+  
+    };
     setInitialPlaylist();
   }, [description]);
 

@@ -4,8 +4,6 @@ import "react-toastify/dist/ReactToastify.css";
 import tadpoleLogo from '../imgs/Tadpole.png'
 
 const NavBar = ({ setAuth, isAuthenticated }) => {
-  //if authenticated show seachbar for the zipcode and logout.
-  //Display login and register if not authenticated
 
   const logout = (event) => {
     event.preventDefault();
@@ -54,13 +52,13 @@ const NavBar = ({ setAuth, isAuthenticated }) => {
               </>
             ) : (
               <li className="nav-item">
-                <a
+                <button
                   type="button"
                   className="nav-link logoutBtn"
                   onClick={(event) => logout(event)}
                 >
                   Logout
-                </a>
+                </button>
               </li>
             )}
           </ul>
