@@ -40,14 +40,14 @@ const Dashboard = () => {
 
   const fetchDailyWeather = async (zipcode) => {
     const response = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?zip=${zipcode}&appid=c58c3fb30ceedded908944ec0edfb311&units=imperial`
+      `https://api.openweathermap.org/data/2.5/weather?zip=${zipcode}&appid=c58c3fb30ceedded908944ec0edfb311&units=imperial`
     ).then((response) => response.json());
     console.log("Daily WEather:", typeof response);
     setDailyWeather(response);
 
     //icon & desc for daily:    
     const iconRes = await fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=6bdf48c908e14b99bf5135122210508&q=${zipcode}&days=7&aqi=no&alerts=no`
+      `https://api.weatherapi.com/v1/forecast.json?key=6bdf48c908e14b99bf5135122210508&q=${zipcode}&days=7&aqi=no&alerts=no`
     ).then((iconRes) => iconRes.json());
 
 
