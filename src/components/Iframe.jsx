@@ -32,21 +32,23 @@ const Iframe = ({ todaysweather }) => {
         description === "few clouds" ||
         description === "clear sky" ||
         description === "broken clouds" ||
-        description === "scattered clouds"
+        description === "scattered clouds" ||
+        description === "dust" ||
+        description === "sand" ||
+        description === "Smoke"
       ) {
         initialPlaylists = sunnyPlaylists;
         setDescriptor("nice sunny");
       } else {
         if (
-          description === "shower rain" ||
-          description === "rain" ||
-          description === "thunderstorm" ||
-          description === "overcast clouds"
+          description.includes("rain" || "drizzle" || "thunderstorm") 
         ) {
           initialPlaylists = rainyPlaylists;
           setDescriptor("rainy");
         } else {
-          if (description === "snow" || "mist") {
+          if (description.includes("snow" || "sleet" || "mist" || "fog")
+
+          ) {
             initialPlaylists = snowyPlaylists;
             setDescriptor("chilly");
           }
