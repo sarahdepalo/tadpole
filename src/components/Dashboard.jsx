@@ -24,7 +24,7 @@ const Dashboard = () => {
   const getUserInfo = async () => {
     // Accesses our server and gets us user information
     try {
-      const response = await fetch("http://localhost:3000/dashboard", {
+      const response = await fetch("https://api.sarahdepalo.com/dashboard", {
         method: "GET",
         headers: { token: localStorage.token },
       }).then((response) => response.json());

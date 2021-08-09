@@ -21,6 +21,8 @@ const Homepage = () => {
       "Tequila Shots - Kid Cudi",
       "Saturn - RIZ LA VIE",
       "NO HALO - BROCKHAMPTON",
+      "Good News - Mac Miller",
+      "Peach - Kevin Abstract"
     ];
   
     const getCurrentSong = () => {

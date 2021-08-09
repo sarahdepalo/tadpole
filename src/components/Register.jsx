@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useHistory } from 'react-router';
 
 const Register = ({ setAuth }) => {
   const [inputs, setInput] = useState({
@@ -27,6 +28,8 @@ const Register = ({ setAuth }) => {
     setInput({ ...inputs, [event.target.name]: event.target.value });
   };
 
+  const history = useHistory();
+
   const onSubmit = async (event) => {
     event.preventDefault();
 
@@ -42,7 +45,7 @@ const Register = ({ setAuth }) => {
 
     try {
       //have to set this up as a post since the default is a get
-      const response = await fetch("http://localhost:3000/auth/register", {
+      const response = await fetch("https://api.sarahdepalo.com/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -54,7 +57,9 @@ const Register = ({ setAuth }) => {
 
         if (parseRes.token) {
           localStorage.setItem("token", parseRes.token); //sets our jwt token in our local storage!
-          setAuth(true);
+          // setAuth(true);
+          //added this to redirect to login page instead
+          history.push("/login")
           toast.success("Registered Successfully!");
         }
       } else {

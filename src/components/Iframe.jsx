@@ -15,6 +15,8 @@ const Iframe = ({ todaysweather }) => {
       "0LXHPX3maaIvca0IHhzZ5w",
       "103vakotCcEgU3U10gdzKR",
       "1KYA5TFAAdhp0QmbQ9pmu2",
+      "1MAY8w4NL21o8WPNehUChz",
+      "727r1jQ5dZJtKTg7T5golu"
     ];
   
     const rainyPlaylists = ["4mQpN5o9JWjgA2klK2kr27", "0pjlGlL6fcnReFeXJ3zn7G"];
