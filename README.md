@@ -9,7 +9,7 @@ Server-side code can be found [here](https://github.com/sarahdepalo/tadpole_back
 ## Screenshots
 ![screenshot of the homepage](./public/homepage.png)
 ![screenshot of the login](./public/login.png)
-![screenshot of the user dashboard](./public/dashboard.png)
+![screenshot of the user dashboard](./public/dashboard2.png)
 
 
 ## Future Goals
