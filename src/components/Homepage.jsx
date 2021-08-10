@@ -40,7 +40,7 @@ const Homepage = () => {
               <p>
                 Tadpole was created for those who love to match their daily
                 music listening to the weather outside. Whether you want to go
-                out and celebrate or stay in bed all day, we've got you covered.
+                out and celebrate or stay in bed all day, we've got you covered with the perfect music.
               </p>
               <Link to="/register" className="btn2">
                 CREATE AN ACCOUNT

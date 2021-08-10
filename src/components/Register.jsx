@@ -57,7 +57,7 @@ const Register = ({ setAuth }) => {
 
         if (parseRes.token) {
           localStorage.setItem("token", parseRes.token); //sets our jwt token in our local storage!
-          // setAuth(true);
+          setAuth(true);
           //added this to redirect to login page instead
           history.push("/login")
           toast.success("Registered Successfully!");
