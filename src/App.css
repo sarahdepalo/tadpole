@@ -518,6 +518,24 @@ footer img {
     height: auto;
   }
 }
+/* PORTRAIT MODE ONLY IPAD */
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+  .heroContainer {
+    height: 100vh;
+  }
+
+  .welcomeContainer {
+    height: auto;
+  }
+  .screenshotContainer {
+    display: none;
+  }
+  .hiddenScreenshot {
+    display: block;
+  }
+}
+
+/* FONTS */
 
 @media (min-width: 640px) {
   body {
