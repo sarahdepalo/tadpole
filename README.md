@@ -1,4 +1,4 @@
-# Tadpole
+<h1 align="center">Tadpole 🐸 </h1>
 
 Tadpole is a PERN web application that combines music and weather. After users create their account, they are directed to their customized dashboard where curated playlists will display based on the weather. Users have the option to get a new weather-based playlist or browse all of Tadpole's playlists on Spotify. The dashboard is also a place where users can check out the daily and weekly weather for their saved location or search for the weather of another city based on zipcode.
 
