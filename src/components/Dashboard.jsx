@@ -20,7 +20,7 @@ const Dashboard = () => {
   const getUserInfo = async () => {
     // Accesses our server and gets us user information
     try {
-      const response = await fetch("https://api.sarahdepalo.com/dashboard", {
+      const response = await fetch("https://tadpolebackend-production.up.railway.app/dashboard", {
         method: "GET",
         headers: { token: localStorage.token },
       }).then((response) => response.json());

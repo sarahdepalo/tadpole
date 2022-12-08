@@ -27,7 +27,7 @@ function App() {
 
   async function isAuth() {
     try {
-      const response = await fetch("https://api.sarahdepalo.com/auth/verify", {
+      const response = await fetch("https://tadpolebackend-production.up.railway.app/auth/verify", {
         method: "GET",
         headers: { token: localStorage.token },
       });

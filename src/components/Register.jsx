@@ -45,7 +45,7 @@ const Register = ({ setAuth }) => {
 
     try {
       //have to set this up as a post since the default is a get
-      const response = await fetch("https://api.sarahdepalo.com/auth/register", {
+      const response = await fetch("https://tadpolebackend-production.up.railway.app/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),

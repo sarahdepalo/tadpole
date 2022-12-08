@@ -33,6 +33,7 @@ const Iframe = ({ todaysweather }) => {
         description === "clear sky" ||
         description === "broken clouds" ||
         description === "scattered clouds" ||
+        description === "overcast clouds" ||
         description === "dust" ||
         description === "sand" ||
         description === "Smoke"
